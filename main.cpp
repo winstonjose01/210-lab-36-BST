@@ -28,7 +28,7 @@ int main() {
     int choice = 0;
     cout << "The binary search tree has been populated." << endl;
     while (choice < 7){
-        string record;
+        string record, newrecord;
         cout << endl;
         cout << "Choose an option:" << endl;
         cout << "[1] Add a record " << endl;
@@ -40,7 +40,7 @@ int main() {
         cin >> choice;
         switch (choice){
             case 1: 
-                cout << "Enter the record to add: ";
+                cout << "Enter the new record to add: ";
                 cin >> record;
                 codes.insertNode(record);
                 break;
@@ -49,19 +49,31 @@ int main() {
                 cin >> record;
                 codes.remove(record);
                 break;
+            case 3:
+                cout << "Enter the record you are searching for: ";
+                cin >> record;
+                codes.searchNode(record);
+                break;
             case 4:
+                cout << "Enter the record you want to modify: ";
+                cin >> record;
+                cout << "\nEnter the record value: ";
+                cin >> newrecord;
+                codes.modifyNode(record, newrecord);
+                break;
+            case 5:
                 cout << "Display tree InOrder";
                 codes.displayInOrder();
                 break;
-            case 5:
+            case 6:
                 cout << "Display tree PreOrder";
                 codes.displayPreOrder();
                 break;
-            case 6:
+            case 7:
                 cout << "Display tree PostOrder";
                 codes.displayPreOrder();
                 break;
-            case 7: 
+            case 8: 
                 exit(1);
                 break;
             
