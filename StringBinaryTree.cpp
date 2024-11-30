@@ -64,7 +64,8 @@ bool StringBinaryTree::modifyNode(string val, string newval) {
 
    while (nodePtr)    {
       if (nodePtr->value == val){
-         nodePtr->value = newval;
+         remove(val);
+         insertNode(newval);
          cout << val << " has been modified to " << newval;
          return true;
       }
