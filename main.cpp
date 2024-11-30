@@ -1,6 +1,7 @@
 #include <fstream>
-#include "IntBinaryTree.h"
+//#include "IntBinaryTree.h"
 #include "StringBinaryTree.h"
+#include "StringBinaryTree.cpp"
 #include <iostream>
 #include <cstdlib>
 using namespace std;
@@ -20,11 +21,12 @@ int main() {
     else{
         while (getline(fin,line)){
             codes.insertNode(line);
+            cout << line << endl;
             numline++;
         }
     }
     fin.clear();
     fin.seekg(0);
-
+    cout << numline;
     return 0;
 }
