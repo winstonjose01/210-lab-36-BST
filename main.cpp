@@ -4,7 +4,11 @@
 #include "StringBinaryTree.cpp"
 #include <iostream>
 #include <cstdlib>
+#include <thread>
 using namespace std;
+
+int TEST_DELAYTIME = 4;
+void testing(StringBinaryTree &);
 
 int main() {
     srand(time(0));
@@ -27,7 +31,7 @@ int main() {
     fin.seekg(0);
     int choice = 0;
     cout << "The binary search tree has been populated." << endl;
-    while (choice < 7){
+    while (choice < 9){
         string record, newrecord;
         cout << endl;
         cout << "Choose an option:" << endl;
@@ -35,7 +39,11 @@ int main() {
         cout << "[2] Delete a record " << endl;
         cout << "[3] Search for a record " << endl;
         cout << "[4] Modify a record" << endl;
-        cout << "[5] Quit" << endl;
+        cout << "[5] Display the tree InOrder" << endl;
+        cout << "[6] Display the tree PreOrder " << endl;
+        cout << "[7] Display the tree PostOrder" << endl;
+        cout << "[8] Test all BST functions" << endl;
+        cout << "[9] Quit" << endl;
         cout << " Option ---> ";
         cin >> choice;
         switch (choice){
@@ -52,7 +60,10 @@ int main() {
             case 3:
                 cout << "Enter the record you are searching for: ";
                 cin >> record;
-                codes.searchNode(record);
+                if (codes.searchNode(record))
+                    cout << "Record found: " << record << endl;
+                else
+                    cout << "Record not found. " << endl;
                 break;
             case 4:
                 cout << "Enter the record you want to modify: ";
@@ -71,15 +82,109 @@ int main() {
                 break;
             case 7:
                 cout << "Display tree PostOrder";
-                codes.displayPreOrder();
+                codes.displayPostOrder();
                 break;
             case 8: 
-                exit(1);
+                cout << "----TESTING ALL BST FUNCTIONS----\n ";
+                testing(codes);
                 break;
+            case 9: 
+                cout << "Exiting the program. ";
+                return 0;
             
         }
     }
-
-
     return 0;
+}
+
+void testing(StringBinaryTree &temp){
+    
+    std::this_thread::sleep_for(std::chrono::seconds(TEST_DELAYTIME));
+    cout << "\n--------- Inserting new records ----------";
+    cout << "\nInserting 'winston'";
+    temp.insertNode ("winston");
+    cout << "\nInserting 'jose'";
+    temp.insertNode ("jose");
+    cout << endl;
+
+    std::this_thread::sleep_for(std::chrono::seconds(TEST_DELAYTIME));
+    cout << "\n--------- Searching for the added records ----------";
+    cout << "\nSearching 'winston'";
+    if (temp.searchNode("winston")) 
+        cout <<"\n\t-> Record 'winston' FOUND";
+    else 
+        cout <<"\n\t-> Record 'winston' NOT FOUND";
+
+    cout << "\nSearching 'jose'";
+    if(temp.searchNode("jose"))
+        cout <<"\n\t-> Record 'jose' FOUND";
+    else 
+        cout <<"\n\t-> Record 'jose' NOT FOUND";
+    cout << endl;
+
+    std::this_thread::sleep_for(std::chrono::seconds(TEST_DELAYTIME));
+    cout << "\n--------- Deleting the added records ----------";
+    cout << "\nDeleting 'winston'";
+    temp.remove("winston");
+    cout << "\nDeleting 'jose'";
+    temp.remove ("jose");
+    cout << endl;
+
+    std::this_thread::sleep_for(std::chrono::seconds(TEST_DELAYTIME));
+    cout << "\n--------- Searching for deleted record ----------";
+    cout << "\nSearching 'winston'";
+    if (temp.searchNode("winston")) 
+        cout <<"\n\t-> Record 'winston' FOUND";
+    else 
+        cout <<"\n\t-> Record 'winston' NOT FOUND";
+    cout << "\nSearching 'jose'";
+    if(temp.searchNode("jose"))
+        cout <<"\n\t-> Record 'jose' FOUND";
+    else 
+        cout <<"\n\t-> Record 'jose' NOT FOUND";
+    cout << endl;
+
+    std::this_thread::sleep_for(std::chrono::seconds(TEST_DELAYTIME));
+    cout << "\n--------- Putting back the previous records ----------";
+    cout << "\nInserting 'winston'";
+    temp.insertNode ("winston");
+    cout << "\nInserting 'jose'";
+    temp.insertNode ("jose");
+    cout << endl;
+
+    std::this_thread::sleep_for(std::chrono::seconds(TEST_DELAYTIME));
+    cout << "\n--------- Modify Record ----------";
+    cout << "\nModifying 'winston' with 'james' --> ";
+    if (temp.modifyNode("winston","james"))
+    cout << "\nModifying 'jose' with 'albert' --> ";
+    if (temp.modifyNode("jose","albert"))
+    cout << endl;
+
+    std::this_thread::sleep_for(std::chrono::seconds(TEST_DELAYTIME));
+    cout << "\n--------- Searching tree for modified record ----------";
+    cout << "\nSearching 'winston'";
+    if (temp.searchNode("james")) 
+        cout <<"\n\t-> Record 'james' FOUND";
+    else 
+        cout <<"\n\t-> Record 'james' NOT FOUND";
+    cout << "\nSearching 'albert'";
+    if(temp.searchNode("jose"))
+        cout <<"\n\t-> Record 'albert' FOUND";
+    else 
+        cout <<"\n\t-> Record 'albert' NOT FOUND";
+
+    cout << "\n--------- Display Record InOrder ----------";
+    std::this_thread::sleep_for(std::chrono::seconds(TEST_DELAYTIME));
+    temp.displayInOrder();
+    cout << endl;
+
+    cout << "\n--------- Display Record PreOrder ----------";
+    std::this_thread::sleep_for(std::chrono::seconds(TEST_DELAYTIME));
+    temp.displayPreOrder();
+    cout << endl;
+
+    cout << "\n--------- Display Record PostOrder ----------";
+    std::this_thread::sleep_for(std::chrono::seconds(TEST_DELAYTIME));
+    temp.displayPostOrder();
+    
 }

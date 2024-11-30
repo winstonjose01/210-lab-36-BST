@@ -65,7 +65,7 @@ bool StringBinaryTree::modifyNode(string val, string newval) {
    while (nodePtr)    {
       if (nodePtr->value == val){
          nodePtr->value = newval;
-         cout << val << "has been modified to " << newval;
+         cout << val << " has been modified to " << newval;
          return true;
       }
       else if (val < nodePtr->value)
@@ -90,6 +90,10 @@ void StringBinaryTree::deleteNode(string val, TreeNode *&nodePtr) {
    else if (val > nodePtr->value)
       deleteNode(val, nodePtr->right);
    else
+      if (!nodePtr){
+         cout << "Value not found in the tree. \n";
+         return;
+      }
       makeDeletion(nodePtr);
 }
 
